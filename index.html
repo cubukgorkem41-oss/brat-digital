@@ -1,0 +1,717 @@
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>BRAT Digital | Premium Technology</title>
+    <meta name="description" content="BRAT Digital - Web tasarımı, yazılım ve dijital çözümler.">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg: #070a10;
+            --card: #101722;
+            --blue: #1688ff;
+            --light-blue: #69b5ff;
+            --white: #f5f8ff;
+            --muted: #929eaf;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--white);
+            font-family: Arial, sans-serif;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        header {
+            height: 85px;
+            padding: 0 9%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid #182130;
+            background: rgba(7,10,16,.95);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(15px);
+        }
+
+        .logo {
+            font-size: 25px;
+            font-weight: 800;
+            letter-spacing: -1px;
+        }
+
+        .logo span {
+            color: var(--blue);
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+
+        nav a {
+            color: #aab4c3;
+            font-size: 14px;
+            transition: .3s;
+        }
+
+        nav a:hover {
+            color: var(--light-blue);
+        }
+
+        .nav-button {
+            background: var(--blue);
+            padding: 12px 19px;
+            border-radius: 7px;
+            color: white;
+        }
+
+        .menu-toggle {
+            display: none;
+            background: none;
+            color: white;
+            border: 0;
+            font-size: 27px;
+            cursor: pointer;
+        }
+
+        .hero {
+            min-height: 680px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 100px 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: "";
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: #087aff;
+            opacity: .13;
+            filter: blur(150px);
+            border-radius: 50%;
+            top: -250px;
+        }
+
+        .hero-content {
+            max-width: 900px;
+            position: relative;
+            animation: appear 1s ease;
+        }
+
+        .tag {
+            display: inline-block;
+            color: var(--light-blue);
+            border: 1px solid #174c80;
+            background: #0c1a2b;
+            padding: 10px 18px;
+            border-radius: 30px;
+            font-size: 12px;
+            letter-spacing: 2px;
+            margin-bottom: 30px;
+        }
+
+        .hero h1 {
+            font-size: clamp(42px, 7vw, 78px);
+            line-height: 1.08;
+            letter-spacing: -3px;
+            margin-bottom: 25px;
+        }
+
+        .hero h1 span,
+        .blue {
+            color: var(--blue);
+        }
+
+        .hero p {
+            max-width: 630px;
+            margin: auto;
+            color: var(--muted);
+            font-size: 17px;
+            line-height: 1.9;
+        }
+
+        .hero-actions {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 38px;
+            flex-wrap: wrap;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 16px 25px;
+            border-radius: 8px;
+            font-weight: bold;
+            transition: .3s;
+            cursor: pointer;
+        }
+
+        .primary {
+            background: var(--blue);
+            color: white;
+            border: 0;
+        }
+
+        .primary:hover {
+            background: #0066d9;
+            transform: translateY(-3px);
+        }
+
+        .secondary {
+            border: 1px solid #344052;
+            color: white;
+        }
+
+        .secondary:hover {
+            border-color: var(--blue);
+            transform: translateY(-3px);
+        }
+
+        section:not(.hero) {
+            padding: 100px 9%;
+        }
+
+        .section-label {
+            color: var(--blue);
+            font-size: 12px;
+            font-weight: bold;
+            letter-spacing: 3px;
+            margin-bottom: 18px;
+        }
+
+        .section-title {
+            font-size: clamp(30px, 4vw, 46px);
+            margin-bottom: 18px;
+            letter-spacing: -1px;
+        }
+
+        .section-description {
+            color: var(--muted);
+            line-height: 1.8;
+            max-width: 600px;
+        }
+
+        .services,
+        .projects {
+            background: #0a0f18;
+        }
+
+        .service-grid {
+            display: grid;
+            grid-template-columns: repeat(3,1fr);
+            gap: 22px;
+            margin-top: 55px;
+        }
+
+        .service-card {
+            background: var(--card);
+            border: 1px solid #1b293b;
+            padding: 32px;
+            border-radius: 13px;
+            transition: .3s;
+        }
+
+        .service-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--blue);
+        }
+
+        .service-icon {
+            font-size: 32px;
+            margin-bottom: 25px;
+        }
+
+        .service-card h3 {
+            margin-bottom: 14px;
+        }
+
+        .service-card p {
+            color: var(--muted);
+            line-height: 1.8;
+            font-size: 14px;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .about-text p {
+            color: var(--muted);
+            line-height: 1.9;
+            margin-top: 15px;
+        }
+
+        .about-visual {
+            min-height: 310px;
+            background: linear-gradient(135deg,#102c4d,#080e18);
+            border: 1px solid #1c4775;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 55px;
+            font-weight: bold;
+        }
+
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(2,1fr);
+            gap: 25px;
+            margin-top: 45px;
+        }
+
+        .project-card {
+            background: var(--card);
+            border: 1px solid #1b293b;
+            border-radius: 13px;
+            overflow: hidden;
+        }
+
+        .project-image {
+            height: 210px;
+            background: linear-gradient(135deg,#123b67,#080e18);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 38px;
+            font-weight: bold;
+            color: #65b4ff;
+        }
+
+        .project-info {
+            padding: 25px;
+        }
+
+        .project-info h3 {
+            margin-bottom: 10px;
+        }
+
+        .project-info p {
+            color: var(--muted);
+            font-size: 14px;
+            line-height: 1.7;
+        }
+
+        .project-type {
+            color: var(--light-blue);
+            font-size: 11px;
+            letter-spacing: 2px;
+            margin-bottom: 12px;
+        }
+
+        .contact {
+            text-align: center;
+        }
+
+        .contact .section-description {
+            margin: auto;
+        }
+
+        .contact-form {
+            max-width: 650px;
+            margin: 45px auto 0;
+            text-align: left;
+            background: var(--card);
+            border: 1px solid #1b293b;
+            border-radius: 14px;
+            padding: 30px;
+        }
+
+        .contact-form label {
+            display: block;
+            margin: 18px 0 9px;
+            color: #dce6f5;
+            font-size: 14px;
+        }
+
+        .contact-form input,
+        .contact-form select,
+        .contact-form textarea {
+            width: 100%;
+            padding: 14px;
+            background: #080e18;
+            color: white;
+            border: 1px solid #29384b;
+            border-radius: 7px;
+            font: inherit;
+            outline: none;
+        }
+
+        .contact-form input:focus,
+        .contact-form select:focus,
+        .contact-form textarea:focus {
+            border-color: var(--blue);
+        }
+
+        .contact-form textarea {
+            min-height: 130px;
+            resize: vertical;
+        }
+
+        .contact-form button {
+            width: 100%;
+            margin-top: 22px;
+        }
+
+        .email-note {
+            color: var(--muted);
+            text-align: center;
+            margin-top: 20px;
+            font-size: 14px;
+        }
+
+        footer {
+            border-top: 1px solid #1b293b;
+            padding: 35px 9%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        footer p {
+            color: #748093;
+            font-size: 13px;
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(25px);
+            transition: .7s ease;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @keyframes appear {
+            from {
+                opacity: 0;
+                transform: translateY(25px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media(max-width:800px) {
+            header {
+                padding: 0 6%;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            nav {
+                display: none;
+                position: absolute;
+                top: 85px;
+                left: 0;
+                width: 100%;
+                background: #0b111c;
+                padding: 25px;
+                flex-direction: column;
+                border-bottom: 1px solid #1b293b;
+            }
+
+            nav.open {
+                display: flex;
+            }
+
+            .service-grid,
+            .about-content,
+            .project-grid {
+                grid-template-columns: 1fr;
+            }
+
+            section:not(.hero) {
+                padding: 75px 6%;
+            }
+
+            .hero {
+                min-height: 600px;
+            }
+
+            .hero h1 {
+                letter-spacing: -2px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <a href="#home" class="logo">BRAT<span>.</span> DIGITAL</a>
+
+    <button class="menu-toggle" id="menuToggle"
+        aria-label="Menüyü aç" aria-expanded="false">☰</button>
+
+    <nav id="navigation">
+        <a href="#home">Ana Sayfa</a>
+        <a href="#services">Hizmetler</a>
+        <a href="#about">Hakkımızda</a>
+        <a href="#projects">Projeler</a>
+        <a href="#contact" class="nav-button">İletişim</a>
+    </nav>
+</header>
+
+<main>
+
+<section class="hero" id="home">
+    <div class="hero-content">
+        <div class="tag">NEXT GENERATION TECHNOLOGY</div>
+
+        <h1>
+            Geleceği<br>
+            <span>Birlikte Kodluyoruz.</span>
+        </h1>
+
+        <p>
+            Dijital dünyada fark yaratmak için modern tasarım,
+            yenilikçi yazılım ve güçlü teknoloji çözümleri.
+        </p>
+
+        <div class="hero-actions">
+            <a href="#services" class="button primary">
+                Hizmetlerimizi Keşfet
+            </a>
+
+            <a href="#projects" class="button secondary">
+                Projelerimiz
+            </a>
+        </div>
+    </div>
+</section>
+
+<section class="services" id="services">
+    <div class="reveal">
+        <div class="section-label">WHAT WE DO</div>
+        <h2 class="section-title">Dijital Çözümlerimiz</h2>
+        <p class="section-description">
+            Fikirleri modern dijital deneyimlere dönüştürüyoruz.
+        </p>
+    </div>
+
+    <div class="service-grid">
+        <div class="service-card reveal">
+            <div class="service-icon">⌘</div>
+            <h3>Web Tasarımı</h3>
+            <p>Modern, hızlı ve mobil uyumlu internet siteleri geliştiriyoruz.</p>
+        </div>
+
+        <div class="service-card reveal">
+            <div class="service-icon">⚙</div>
+            <h3>Yazılım Geliştirme</h3>
+            <p>İhtiyaçlara yönelik yaratıcı yazılım ve dijital araçlar tasarlıyoruz.</p>
+        </div>
+
+        <div class="service-card reveal">
+            <div class="service-icon">✦</div>
+            <h3>Gaming Çözümleri</h3>
+            <p>Oyun toplulukları ve sunucular için dijital projeler geliştiriyoruz.</p>
+        </div>
+    </div>
+</section>
+
+<section id="about">
+    <div class="about-content">
+        <div class="about-text reveal">
+            <div class="section-label">WHO WE ARE</div>
+            <h2 class="section-title">Teknolojiyle Yeni Bir Bakış Açısı.</h2>
+
+            <p>
+                BRAT Digital, dijital dünyada yenilikçi çözümler
+                üretme hedefiyle oluşturulan bir teknoloji girişimidir.
+            </p>
+
+            <p>
+                Amacımız, iyi fikirleri kaliteli tasarım ve
+                yazılımla gerçeğe dönüştürmektir.
+            </p>
+        </div>
+
+        <div class="about-visual reveal">
+            BRAT<span class="blue">.</span>
+        </div>
+    </div>
+</section>
+
+<section class="projects" id="projects">
+    <div class="reveal">
+        <div class="section-label">OUR WORK</div>
+        <h2 class="section-title">Proje Konseptleri</h2>
+        <p class="section-description">
+            Geliştirdiğimiz ve üzerinde çalıştığımız konseptler.
+        </p>
+    </div>
+
+    <div class="project-grid">
+        <div class="project-card reveal">
+            <div class="project-image">GAME HUB</div>
+            <div class="project-info">
+                <div class="project-type">GAMING CONCEPT</div>
+                <h3>Gaming Platform</h3>
+                <p>Oyun toplulukları için web platformu konsepti.</p>
+            </div>
+        </div>
+
+        <div class="project-card reveal">
+            <div class="project-image">DIGITAL</div>
+            <div class="project-info">
+                <div class="project-type">BUSINESS CONCEPT</div>
+                <h3>Business Website</h3>
+                <p>İşletmeler için modern web sitesi konsepti.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="contact" id="contact">
+    <div class="reveal">
+        <div class="section-label">LET'S WORK TOGETHER</div>
+
+        <h2 class="section-title">
+            Projenizi Birlikte<br>
+            <span class="blue">Hayata Geçirelim.</span>
+        </h2>
+
+        <p class="section-description">
+            Web tasarımı, yazılım veya gaming projeleriniz
+            için bize ulaşın.
+        </p>
+    </div>
+
+    <form class="contact-form reveal" id="contactForm">
+
+        <label for="name">Adınız</label>
+        <input type="text" id="name" required
+            placeholder="Adınızı yazın">
+
+        <label for="email">E-posta adresiniz</label>
+        <input type="email" id="email" required
+            placeholder="ornek@email.com">
+
+        <label for="service">İlgilendiğiniz hizmet</label>
+        <select id="service" required>
+            <option value="">Hizmet seçin</option>
+            <option>Web sitesi tasarımı</option>
+            <option>Gaming çözümleri</option>
+            <option>Özel yazılım</option>
+            <option>Diğer</option>
+        </select>
+
+        <label for="message">Projenizi anlatın</label>
+        <textarea id="message" required
+            placeholder="Projeniz hakkında bilgi verin..."></textarea>
+
+        <button type="submit" class="button primary">
+            ✉ E-posta ile Başvuru Gönder
+        </button>
+
+        <p class="email-note">
+            İletişim: iletisim.brat@gmail.com
+        </p>
+    </form>
+</section>
+
+</main>
+
+<footer>
+    <a href="#home" class="logo">BRAT<span>.</span> DIGITAL</a>
+    <p>© 2026 BRAT Digital. Tüm hakları saklıdır.</p>
+</footer>
+
+<script>
+    // Mobil menü
+    const menuToggle = document.getElementById("menuToggle");
+    const navigation = document.getElementById("navigation");
+
+    menuToggle.addEventListener("click", () => {
+        const isOpen = navigation.classList.toggle("open");
+        menuToggle.setAttribute("aria-expanded", isOpen);
+    });
+
+    // Menüden seçim yapınca kapat
+    document.querySelectorAll("#navigation a").forEach(link => {
+        link.addEventListener("click", () => {
+            navigation.classList.remove("open");
+            menuToggle.setAttribute("aria-expanded", "false");
+        });
+    });
+
+    // Kaydırma animasyonları
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add("visible");
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.15 });
+
+    document.querySelectorAll(".reveal").forEach(element => {
+        observer.observe(element);
+    });
+
+    // E-posta başvuru formu
+    document.getElementById("contactForm").addEventListener("submit", function(event) {
+        event.preventDefault();
+
+        const name = document.getElementById("name").value.trim();
+        const email = document.getElementById("email").value.trim();
+        const service = document.getElementById("service").value;
+        const message = document.getElementById("message").value.trim();
+
+        const subject = encodeURIComponent("BRAT Digital - Yeni Proje Talebi");
+
+        const body = encodeURIComponent(
+            "Yeni proje talebi\n\n" +
+            "Ad: " + name + "\n" +
+            "E-posta: " + email + "\n" +
+            "Hizmet: " + service + "\n\n" +
+            "Proje açıklaması:\n" + message
+        );
+
+        window.location.href =
+            "mailto:iletisim.brat@gmail.com?subject=" +
+            subject + "&body=" + body;
+    });
+</script>
+
+</body>
+</html>
